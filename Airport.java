@@ -42,6 +42,20 @@ public class Airport
 
     } // if it is available to add a flight, it adds it to the array
 
+    public boolean removeFlight(Flight f){
+        for (int i=0; i<_noOfFlights; i++) {
+            if (_flightsSchedule[i].equals(f)) {
+                for(int j=i; j<_noOfFlights; j++)  { 
+                    _flightsSchedule[j] = _flightsSchedule[j+1];
+                } // Moves the array one step back to prevent holes
+            _flightsSchedule[_noOfFlights-1] = null;
+            _noOfFlights--;
+            return true;
+            } // End of if statement
+        } // End of for loop
+        return false;
+    }
+    
     public String toString () {
         String allFlights = "The flights from " + _city + "today: ";
         if (_noOfFlights == _MIN_FLIGHTS) {
@@ -83,14 +97,36 @@ public class Airport
             }
             
         }
-        return count;
+        return count; // Returns the amount of full flights 
     } // End of howManyFullFlights
     
     public int howManyFlightsBetween (String city) {
+         String origin = this._city;
+         String dest = city;
+         int count = 0;
+         while (this._city != city) {
+            for (int i=1; i<_noOfFlights; i++) {
+                if (_flightsSchedule[i].getDestination().equals(city)) {
+                    count++;
+                } 
+            }
+            }
+         return count; // Returns the amount of flights between cities
+         
+    } // End of howManyFlightsBetween
+    
+    public String mostPopularDestination() {
+        
+    }
+    
+    public Flight mostExpensiveTicket() {
+        
+    }
+    
+    public Flight longestFlight() {
         
     }
 }
-
     
 /**public String toString() {
 
